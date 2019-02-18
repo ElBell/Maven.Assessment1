@@ -46,4 +46,18 @@ public class PetTest {
         // Then
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void getOwnerTest2() {
+        // Given
+        Pet p = new Dog();
+        PetOwner expected = new PetOwner(null, p);
+
+        // When
+        p.setOwner(expected);
+        PetOwner actual = p.getOwner();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+    }
 }
