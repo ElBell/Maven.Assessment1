@@ -10,16 +10,26 @@ public class IntegerUtils {
      * @param n integer value input by client
      * @return the sum of all integers between 0 and not including `n`
      */
+    //Comment incorrect? test includes n
     public static Integer getSumOfN(Integer n) {
-        return null;
+        Integer answer = 0;
+        for (int i = 0; i <= n; i++) {
+            answer+= i;
+        }
+        return answer;
     }
 
     /**
      * @param n integer value input by client
      * @return the product of all integers between 0 and not including `n`
      */
+    //Comment incorrect? test includes n
     public static Integer getProductOfN(Integer n) {
-        return null;
+        Integer answer = 1;
+        for (int i = 1; i <= n; i++) {
+            answer *= i;
+        }
+        return answer;
     }
 
     /**
@@ -27,6 +37,7 @@ public class IntegerUtils {
      * @return integer with identical digits in the reverse order
      */
     public static Integer reverseDigits(Integer val) {
-        return null;
+        StringBuilder reversed = new StringBuilder(val.toString());
+        return Integer.valueOf(reversed.reverse().toString());
     }
 }
