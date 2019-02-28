@@ -12,7 +12,8 @@ public class Palindrome {
         int palindromeCount = 0;
         for (int i = 0; i < input.length(); i++) {
             for (int j = i+1; j <= input.length(); j++) {
-                if(reverse(input.substring(i,j)).equals(input.substring(i,j))) {
+                String currentSubstring = input.substring(i,j);
+                if(reverse(currentSubstring).equals(currentSubstring)) {
                     palindromeCount++;
                 }
             }
@@ -23,5 +24,4 @@ public class Palindrome {
     public static String reverse(String input) {
         return new StringBuilder(input).reverse().toString();
     }
-
 }

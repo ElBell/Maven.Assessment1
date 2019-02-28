@@ -46,6 +46,7 @@ public class ArrayUtils {
      * @return the most frequently occurring object in the array
      * given an array of objects, named `objectArray` return the most frequently occuring object in the array
      */
+    @SuppressWarnings("Duplicates")
     public static Object getMostCommon(Object[] objectArray) {
         Object mostCommon = objectArray[0];
         for(Object current : objectArray) {

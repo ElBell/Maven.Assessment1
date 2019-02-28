@@ -8,8 +8,8 @@ import java.util.List;
  * Created by leon on 2/16/18.
  */
 public class PetOwner {
-    String name;
-    Pet[] pets = new Pet[0];
+    private String name;
+    private List<Pet> pets;
     /**
      * @param name name of the owner of the Pet
      * @param pets array of Pet object
@@ -17,45 +17,34 @@ public class PetOwner {
     public PetOwner(String name, Pet... pets) {
         this.name = name;
         if (pets != null) {
-            this.pets = pets.clone();
-            setOwner(this.pets);
+            this.pets = new ArrayList<>(Arrays.asList(pets));
+            for(Pet pet : pets) {
+                pet.setOwner(this);
+            }
+        } else {
+            this.pets = new ArrayList<>();
         }
     }
 
-    public void setOwner (Pet... pets) {
-        for(Pet currentPet : pets) {
-            currentPet.setOwner(this);
-        }
-    }
+//    public void setOwner (Pet... pets) {
+//        for(Pet currentPet : pets) {
+//            currentPet.setOwner(this);
+//        }
+//    }
 
     /**
-     * @param array to be added to the composite collection of Pets
+     * @param pet to be added to the composite collection of Pets
      */
 
-    public List<Pet> convertToList(Pet[] array) {
-        return new ArrayList<>(Arrays.asList(pets));
-    }
-
-    public Pet[] convertFromList(List<Pet> list) {
-        return list.toArray(new Pet[list.size()]);
-    }
     public void addPet(Pet pet) {
-        List<Pet> listPets = convertToList(pets);
-        listPets.add(pet);
-        this.pets = convertFromList(listPets);
+        pets.add(pet);
     }
 
     /**
      * @param pet pet to be removed from the composite collection Pets
      */
     public void removePet(Pet pet) {
-        List<Pet> listPets = convertToList(pets);
-        listPets.remove(pet);
-        if(convertFromList(listPets).length > 0) {
-            this.pets = convertFromList(listPets);
-        } else {
-            this.pets = new Pet[1];
-        }
+           pets.remove(pet);
     }
 
     /**
@@ -63,15 +52,15 @@ public class PetOwner {
      * @return true if I own this pet
      */
     public Boolean isOwnerOf(Pet pet) {
-        List<Pet> listPets = convertToList(pets);
-        return listPets.contains(pet);
+        return pets.contains(pet);
     }
 
     /**
      * @return the age of the Pet object whose age field is the lowest amongst all Pets in this class
      */
+    @SuppressWarnings("Duplicates")
     public Integer getYoungetPetAge() {
-        Pet youngest = pets[0];
+        Pet youngest = pets.get(0);
         for (Pet currentPet : pets) {
             if (currentPet.getAge() < youngest.getAge()) {
                 youngest = currentPet;
@@ -86,8 +75,9 @@ public class PetOwner {
     /**
      * @return the age of the Pet object whose age field is the highest amongst all Pets in this class
      */
+    @SuppressWarnings("Duplicates")
     public Integer getOldestPetAge() {
-        Pet oldest = pets[0];
+        Pet oldest = pets.get(0);
         for (Pet currentPet : pets) {
             if (currentPet.getAge() > oldest.getAge()) {
                 oldest = currentPet;
@@ -105,14 +95,14 @@ public class PetOwner {
         for (Pet currentPet : pets) {
             total += currentPet.getAge();
         }
-        return (float)total/pets.length;
+        return (float)total/pets.size();
     }
 
     /**
      * @return the number of Pet objects stored in this class
      */
     public Integer getNumberOfPets() {
-        return pets.length;
+        return pets.size();
     }
 
     /**
@@ -126,10 +116,10 @@ public class PetOwner {
      * @return array representation of animals owned by this PetOwner
      */
     public Pet[] getPets() {
-        if(pets.length > 0) {
-            return pets;
+        if(pets.size() > 0) {
+            return pets.toArray(new Pet[0]);
         } else {
-            return null;
+            return new Pet[1];
         }
     }
 }
