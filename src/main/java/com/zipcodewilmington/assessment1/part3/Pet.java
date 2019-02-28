@@ -1,9 +1,11 @@
 package com.zipcodewilmington.assessment1.part3;
 
+import java.util.Collections;
+
 /**
  * Created by leon on 2/16/18.
  */
-public abstract class Pet implements Animal {
+public abstract class Pet implements Animal, Comparable<Pet>{
     String name;
     Integer age;
     PetOwner owner;
@@ -49,6 +51,7 @@ public abstract class Pet implements Animal {
         return name;
     }
 
+
     /**
      * @return age of this pet
      */
@@ -69,5 +72,9 @@ public abstract class Pet implements Animal {
      */
     public PetOwner getOwner() {
         return owner;
+    }
+
+    public int compareTo(Pet pet) {
+        return age.compareTo(pet.getAge());
     }
 }
