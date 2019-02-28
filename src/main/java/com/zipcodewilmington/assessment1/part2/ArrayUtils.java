@@ -1,6 +1,6 @@
 package com.zipcodewilmington.assessment1.part2;
 import java.lang.*;
-import java.util.Arrays;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -46,15 +46,15 @@ public class ArrayUtils {
      * @return the most frequently occurring object in the array
      * given an array of objects, named `objectArray` return the most frequently occuring object in the array
      */
-    @SuppressWarnings("Duplicates")
+
+
     public static Object getMostCommon(Object[] objectArray) {
-        Object mostCommon = objectArray[0];
-        for(Object current : objectArray) {
-            if (getNumberOfOccurrences(objectArray, mostCommon) < getNumberOfOccurrences(objectArray, current)) {
-                mostCommon = current;
-            }
-        }
-        return mostCommon;
+       return sortArray(objectArray)[objectArray.length - 1];
+    }
+    private static Object[] sortArray(Object[] objectArray) {
+        Arrays.sort(objectArray,
+                (a, b) -> getNumberOfOccurrences(objectArray, a) - getNumberOfOccurrences(objectArray, b));
+        return objectArray;
     }
 
 
@@ -64,13 +64,7 @@ public class ArrayUtils {
      * given an array of objects, named `objectArray` return the least frequently occuring object in the array
      */
     public static Object getLeastCommon(Object[] objectArray) {
-        Object leastCommon = objectArray[0];
-        for(Object current : objectArray) {
-            if (getNumberOfOccurrences(objectArray, leastCommon) > getNumberOfOccurrences(objectArray, current)) {
-                leastCommon = current;
-            }
-        }
-        return leastCommon;
+        return sortArray(objectArray)[0];
     }
 
     /**

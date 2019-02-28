@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class PetOwner {
     private String name;
-    private List<Pet> pets;
+    private List<Pet> pets = new ArrayList<>();
     /**
      * @param name name of the owner of the Pet
      * @param pets array of Pet object
@@ -22,16 +22,9 @@ public class PetOwner {
             for(Pet pet : pets) {
                 pet.setOwner(this);
             }
-        } else {
-            this.pets = new ArrayList<>();
         }
     }
 
-//    public void setOwner (Pet... pets) {
-//        for(Pet currentPet : pets) {
-//            currentPet.setOwner(this);
-//        }
-//    }
 
     /**
      * @param pet to be added to the composite collection of Pets
